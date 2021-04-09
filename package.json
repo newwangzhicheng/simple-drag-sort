@@ -1,0 +1,22 @@
+{
+  "name": "simple-sort",
+  "version": "0.0.1",
+  "description": "a library for draging and sorting DOM list",
+  "main": "dist/SimpleSort.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sortable"
+  ],
+  "author": "wzc",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^2.44.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.3"
+  }
+}
