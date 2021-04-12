@@ -7,13 +7,14 @@ interface AnimationOption {
   animation?: number,
   delay?: number,
   easing?: string,
+  handleClass?: string,
 };
 
 interface SortOption extends AnimationOption {
   sortItemClass: string,
 };
 
-export default class SimpleSort {
+export default class SimpleDragSort {
   protected draggingEl!: HTMLElement;
   protected targetEl!: HTMLElement;
   protected el!: HTMLElement;
@@ -55,8 +56,8 @@ export default class SimpleSort {
       this.removeDraggableAttribute();
 
       this.targetEl = target;
-      this.draggingElOrder = SimpleSort.getIndexOf(this.draggingEl);
-      this.targetElOrder = SimpleSort.getIndexOf(this.targetEl);
+      this.draggingElOrder = SimpleDragSort.getIndexOf(this.draggingEl);
+      this.targetElOrder = SimpleDragSort.getIndexOf(this.targetEl);
       // animate for every element between 
       const positionMap = this.getPositionMap();
       // change positions of draggingEl and targetEl
@@ -64,7 +65,7 @@ export default class SimpleSort {
 
       const animationList: Array<Promise<unknown>> = [];
       positionMap.forEach((position, child) => {
-        animationList.push(SimpleSort.animate(child, position, this.sortOption));
+        animationList.push(SimpleDragSort.animate(child, position, this.sortOption));
       });
       Promise.all(animationList).then(() => {
         this.addDraggableAttribute();
@@ -76,8 +77,6 @@ export default class SimpleSort {
    * change positions of draggingEl and targetEl
    */
   protected changePosition(): void {
-    // this.draggingElOrder = SimpleSort.getIndexOf(this.draggingEl);
-    // this.targetElOrder = SimpleSort.getIndexOf(this.targetEl);
     if (this.draggingElOrder < this.targetElOrder) {
       // index of dragging element is smaller than entered element
       // dragging element insert after entered element

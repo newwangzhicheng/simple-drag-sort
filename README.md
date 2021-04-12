@@ -1,11 +1,11 @@
-# [simplesort](https://github.com/wzc/simplesort)
+# [simple-drag-sort](https://github.com/wzc/simple-drag-sort)
 [![](https://img.shields.io/badge/Powered%20by-jslib%20base-brightgreen.svg)](https://github.com/yanhaijing/jslib-base)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wzc/simplesort/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/wzc/simplesort.svg?branch=master)](https://travis-ci.org/wzc/simplesort)
-[![Coveralls](https://img.shields.io/coveralls/wzc/simplesort.svg)](https://coveralls.io/github/wzc/simplesort)
-[![npm](https://img.shields.io/badge/npm-0.1.0-orange.svg)](https://www.npmjs.com/package/simplesort)
-[![NPM downloads](http://img.shields.io/npm/dm/simplesort.svg?style=flat-square)](http://www.npmtrends.com/simplesort)
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/wzc/simplesort.svg)](http://isitmaintained.com/project/wzc/simplesort "Percentage of issues still open")
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wzc/simple-drag-sort/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/wzc/simple-drag-sort.svg?branch=master)](https://travis-ci.org/wzc/simple-drag-sort)
+[![Coveralls](https://img.shields.io/coveralls/wzc/simple-drag-sort.svg)](https://coveralls.io/github/wzc/simple-drag-sort)
+[![npm](https://img.shields.io/badge/npm-0.1.0-orange.svg)](https://www.npmjs.com/package/simple-drag-sort)
+[![NPM downloads](http://img.shields.io/npm/dm/simple-drag-sort.svg?style=flat-square)](http://www.npmtrends.com/simple-drag-sort)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/wzc/simple-drag-sort.svg)](http://isitmaintained.com/project/wzc/simple-drag-sort "Percentage of issues still open")
 
 最好用的 `JS|TS` 第三方库脚手架
 
@@ -44,33 +44,25 @@
 通过npm下载安装代码
 
 ```bash
-$ npm install --save simplesort
+$ npm install --save simple-drag-sort
 ```
 
 如果你是node环境
 
 ```js
-var base = require('simplesort');
+var SimpleDragSort = require('simple-drag-sort');
 ```
 
 如果你是webpack等环境
 
 ```js
-import base from 'simplesort';
-```
-
-如果你是requirejs环境
-
-```js
-requirejs(['node_modules/simplesort/dist/index.aio.js'], function (base) {
-    // xxx
-})
+import SimpleDragSort from 'simple-drag-sort';
 ```
 
 如果你是浏览器环境
 
 ```html
-<script src="node_modules/simplesort/dist/index.aio.js"></script>
+<script src="node_modules/simple-drag-sort/dist/simple-drag-sort.umd.js"></script>
 ```
 
 ## :bookmark_tabs: 文档
@@ -111,7 +103,7 @@ $ npm publish
 
 ## 贡献者列表
 
-[contributors](https://github.com/wzc/simplesort/graphs/contributors)
+[contributors](https://github.com/wzc/simple-drag-sort/graphs/contributors)
 
 ## :gear: 更新日志
 [CHANGELOG.md](./CHANGELOG.md)

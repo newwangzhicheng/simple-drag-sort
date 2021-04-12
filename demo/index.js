@@ -1,8 +1,8 @@
-import SimpleSort from '../dist/SimpleSort.js';
+import SimpleDragSort from '../dist/SimpleDragSort.esm.js';
 window.onload = () => {
   const el = document.querySelector('.list');
-  new SimpleSort(el, {
-    animation: 250,
+  new SimpleDragSort(el, {
+    animation: 150,
     easing: 'ease-out',
   });
   el.ondragstart = (e) => {
