@@ -1,11 +1,5 @@
 'use strict';
 
-var throttle = require('lodash/throttle');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var throttle__default = /*#__PURE__*/_interopDefaultLegacy(throttle);
-
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -52,7 +46,7 @@ class SimpleDragSort {
             this.draggingEl = this.getSortItem(e.target);
         });
         // add dragenter delegation to detect entered element
-        this.el.addEventListener('dragenter', throttle__default['default'](this.dragenterHandler.bind(this), 50, { trailing: false }));
+        this.el.addEventListener('dragenter', this.dragenterHandler.bind(this));
     }
     dragenterHandler(e) {
         const target = e.target;

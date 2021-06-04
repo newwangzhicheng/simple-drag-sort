@@ -3,7 +3,7 @@ window.onload = () => {
   new SimpleDragSort(el, {
     animation: 150,
     easing: 'ease-out',
-    handle: '.handle'
+    // handle: '.handle'
   });
   el.ondragstart = (e) => {
     e.target.style.backgroundColor = 'lightsalmon';

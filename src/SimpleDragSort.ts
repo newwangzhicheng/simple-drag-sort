@@ -1,5 +1,3 @@
-import throttle from 'lodash/throttle';
-
 interface Position {
   x: number,
   y: number,
@@ -54,7 +52,7 @@ export default class SimpleDragSort {
     });
 
     // add dragenter delegation to detect entered element
-    this.el.addEventListener('dragenter', throttle(this.dragenterHandler.bind(this), 50, { trailing: false }));
+    this.el.addEventListener('dragenter', this.dragenterHandler.bind(this));
   }
 
   protected dragenterHandler(e: DragEvent) {
