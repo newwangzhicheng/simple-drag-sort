@@ -1,5 +1,11 @@
 'use strict';
 
+var throttle = require('lodash/throttle');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var throttle__default = /*#__PURE__*/_interopDefaultLegacy(throttle);
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -28,35 +34,33 @@ function __awaiter(thisArg, _arguments, P, generator) {
 class SimpleDragSort {
     constructor(el, sortOption) {
         this.sortOption = {
-            sortItemClass: 'sort-item',
+            sortItem: '.sort-item',
             animation: 150,
             delay: 0,
             easing: 'ease-out',
         };
         this.el = el;
-        if (sortOption) {
-            this.sortOption.sortItemClass = (typeof sortOption.sortItemClass === 'string') ? sortOption.sortItemClass : this.sortOption.sortItemClass;
-            this.sortOption.animation = (typeof sortOption.animation === 'number') ? sortOption.animation : this.sortOption.animation;
-            this.sortOption.delay = (typeof sortOption.delay === 'number') ? sortOption.delay : this.sortOption.delay;
-            this.sortOption.easing = (typeof sortOption.easing === 'string') ? sortOption.easing : this.sortOption.easing;
-            this.sortOption.handleClass = (typeof sortOption.handleClass === 'string') ? sortOption.handleClass : this.sortOption.handleClass;
-        }
-        this.addDraggableAttribute();
-        // add dragstart delegation to detect dragging element
-        el.addEventListener('dragstart', (e) => {
+        Object.assign(this.sortOption, sortOption);
+        this.el.addEventListener('mousedown', (e) => {
             const target = e.target;
-            if (target.classList.contains(this.sortOption.sortItemClass)) {
-                this.draggingEl = target;
+            if (target === this.getHandle(target)) {
+                this.addDraggableAttribute(this.getSortItem(target));
             }
         });
+        // add dragstart delegation to detect dragging element
+        this.el.addEventListener('dragstart', (e) => {
+            this.draggingEl = this.getSortItem(e.target);
+        });
         // add dragenter delegation to detect entered element
-        el.addEventListener('dragenter', this.dragenterHandler.bind(this));
+        this.el.addEventListener('dragenter', throttle__default['default'](this.dragenterHandler.bind(this), 50, { trailing: false }));
     }
     dragenterHandler(e) {
         const target = e.target;
-        if (target.classList.contains(this.sortOption.sortItemClass) && target !== this.draggingEl) {
-            this.removeDraggableAttribute();
-            this.targetEl = target;
+        this.targetEl = this.getSortItem(target);
+        if (this.enteredEl === this.targetEl) {
+            return;
+        }
+        if (this.targetEl && this.targetEl !== this.draggingEl) {
             this.draggingElOrder = SimpleDragSort.getIndexOf(this.draggingEl);
             this.targetElOrder = SimpleDragSort.getIndexOf(this.targetEl);
             // animate for every element between 
@@ -68,9 +72,10 @@ class SimpleDragSort {
                 animationList.push(SimpleDragSort.animate(child, position, this.sortOption));
             });
             Promise.all(animationList).then(() => {
-                this.addDraggableAttribute();
+                this.removeDraggableAttribute(this.draggingEl);
             });
         }
+        this.enteredEl = this.targetEl;
     }
     /**
      * change positions of draggingEl and targetEl
@@ -90,20 +95,14 @@ class SimpleDragSort {
     /**
      * add draggable attribute for  element
      */
-    addDraggableAttribute() {
-        const children = this.el.querySelectorAll('.' + this.sortOption.sortItemClass);
-        children.forEach((child) => {
-            child.setAttribute('draggable', 'true');
-        });
+    addDraggableAttribute(el) {
+        el.setAttribute('draggable', 'true');
     }
     /**
      * remove draggable attribute for  element
      */
-    removeDraggableAttribute() {
-        const children = this.el.querySelectorAll('.' + this.sortOption.sortItemClass);
-        children.forEach((child) => {
-            child.setAttribute('draggable', 'false');
-        });
+    removeDraggableAttribute(el) {
+        el.setAttribute('draggable', 'false');
     }
     /**
      * get the index of child
@@ -154,6 +153,30 @@ class SimpleDragSort {
             }
         }
         return positionMap;
+    }
+    /**
+     * get handle
+     */
+    getHandle(el) {
+        var _a;
+        if (this.sortOption.handle) {
+            return (_a = el.closest(this.sortOption.sortItem)) === null || _a === void 0 ? void 0 : _a.querySelector(this.sortOption.handle);
+        }
+        else {
+            return el.closest(this.sortOption.sortItem);
+        }
+    }
+    /**
+     * get sort item
+     */
+    getSortItem(el) {
+        return el.closest(this.sortOption.sortItem);
+    }
+    /**
+     * judge if it is sort item
+     */
+    isSortItem(el) {
+        return this.el.contains(el) && el.classList.contains(this.sortOption.sortItem);
     }
 }
 

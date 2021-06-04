@@ -1,4 +1,6 @@
 import typescript from '@rollup/plugin-typescript';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json';
 
 export default [
@@ -10,14 +12,16 @@ export default [
       format: 'umd',
     },
     plugins: [
+      nodeResolve(),
+      commonjs(),
       typescript(),
     ],
   },
   {
     input: 'src/SimpleDragSort.ts',
-    external: ['ms'],
+    external: ['throttle'],
     plugins: [
-      typescript()
+      typescript(),
     ],
     output: [
       {

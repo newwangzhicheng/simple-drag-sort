@@ -1,14 +1,13 @@
 {
   "name": "simple-drag-sort",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "a library for draging and sorting DOM list",
   "main": "dist/SimpleDragSort.cjs.js",
   "browser": "dist/SimpleDragSort.umd.js",
   "module": "dist/SimpleDragSort.esm.js",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rollup -c -w"
   },
   "keywords": [
     "sortable"
@@ -17,14 +16,17 @@
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-commonjs": "^18.1.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
     "@rollup/plugin-typescript": "^8.2.1",
+    "@types/lodash": "^4.14.170",
     "@types/ms": "^0.7.31",
     "rollup": "^2.44.0",
     "ts-node": "^9.1.1",
     "tslib": "^2.2.0",
     "typescript": "^4.2.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
